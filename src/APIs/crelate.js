@@ -1,3 +1,5 @@
+import formatName from "../functions/formatName"
+
 // This file is for Crelate functions
 
 /** 
@@ -10,12 +12,15 @@
 async function submitHAALOToCrelate (user, persona, scores, culture, percentages) {
     const descriptions = (persona.description).join(', ')
 
+    const formattedFirstName = formatName(user.firstName)
+    const formattedLastName = formatName(user.lastName)
+
     // Send to Crelate
 
     const crelateData = JSON.stringify({
         "entity": {
-          "FirstName": user.firstName,
-          "LastName": user.lastName,
+          "FirstName": formattedFirstName,
+          "LastName": formattedLastName,
           "CustomFields": {
             "HAALO_Persona": {
               "Id": persona.id,

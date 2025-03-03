@@ -1,3 +1,6 @@
+import formatName from "../functions/formatName"
+
+
 // This file is for AirTable functions
 
 /** 
@@ -10,14 +13,17 @@
 async function submitHAALOToAirTable (user, persona, scores, culture) {
     const descriptions = (persona.description).join(', ')
 
+    const formattedFirstName = formatName(user.firstName)
+    const formattedLastName = formatName(user.lastName)
+
     // Send to Airtable 
     
     const airtableData = JSON.stringify({ 
         "records": [
         {
             "fields": {
-                "fldNkwhg3P8lqxs53": user.firstName,
-                "fld8Qb4phbDgjK2ST": user.lastName,
+                "fldNkwhg3P8lqxs53": formattedFirstName,
+                "fld8Qb4phbDgjK2ST": formattedLastName,
                 "fld4FuqsRa8SAf6Cb": user.email,
                 "fldL6JzdRtXqLFKMg": persona.name,
                 "fldWsB67lH5j1mBgb": descriptions,
